@@ -1,0 +1,33 @@
+/*! _buttons.scss | HTML Nunjucks Starter */
+
+/* ==========================================================================
+Buttons
+========================================================================== */
+
+/***
+TABLE OF CONTENTS
+=============================================================================
+1. Opacity
+2. Text utils
+...Other
+=============================================================================
+***/
+
+
+// Buttons
+// --
+.btn, button {
+  @extend %default-transition;
+  @include ms-respond(font-size, 0, $buttons-modular-scale);
+  font-family: $buttons-font-family;
+  font-weight: $buttons-font-weight;
+}
+
+.btn {
+  font-size: rem(18);
+  padding: rem(10) rem(25);
+  font-weight: bold;
+  @include media-breakpoint-down(lg) {
+    @include ms-respond(font-size, 0, $buttons-modular-scale);
+  }
+}

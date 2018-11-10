@@ -1,0 +1,87 @@
+/*! _base.scss | HTML Nunjucks Starter */
+
+/* ==========================================================================
+Base rules
+========================================================================== */
+
+
+@viewport {
+  width: device-width;
+}
+
+html {
+  box-sizing: border-box;
+  height: 100%;
+}
+
+* {
+  &:before,
+  &:after {
+    box-sizing: inherit;
+  }
+}
+
+body {
+  @include ms-respond(font-size, 0, $body-modular-scale);
+  -webkit-font-smoothing: antialiased;
+  font-family: $font-family-base;
+  color: $body-color;
+  background-color: #fff;
+  overflow-x: hidden;
+  text-rendering: optimizeLegibility;
+  min-height: 100vh;
+}
+
+a {
+  background: transparent;
+  @extend %color-primary;
+  text-decoration: none;
+  transition: color .2s;
+  cursor: pointer;
+  @include hover() {
+    text-decoration: none;
+  }
+}
+
+
+// Headers (font sizes are set using Modular Scale addon)
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: $headings-font-family;
+  font-weight: $headings-font-weight;
+}
+
+h1, .h1 {
+  @include ms-respond(font-size, 12, $header-modular-scale);
+}
+
+h2, .h2 {
+  @include ms-respond(font-size, 9, $header-modular-scale);
+}
+
+h3, .h3 {
+  @include ms-respond(font-size, 8, $header-modular-scale);
+}
+
+h4, .h4 {
+  @include ms-respond(font-size, 6, $header-modular-scale);
+}
+
+h5, .h5 {
+  @include ms-respond(font-size, 4, $header-modular-scale);
+}
+
+h6, .h6 {
+  @include ms-respond(font-size, 3, $header-modular-scale);
+}
+
+
+@media (max-width: 960px){
+  .container {
+    max-width: 100%;
+  }
+}

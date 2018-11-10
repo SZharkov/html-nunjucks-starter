@@ -1,0 +1,93 @@
+/*! _navbar.scss | HTML Nunjucks Starter */
+
+/* ==========================================================================
+Navbar
+========================================================================== */
+
+/***
+TABLE OF CONTENTS
+=============================================================================
+1. Navbar main styles
+=============================================================================
+***/
+
+
+%toggle-icon {
+  width: 25px;
+  height: 2px;
+  border-radius: 3px;
+  background-color: #ffffff;
+}
+
+
+// 1. Navbar main styles
+// --
+.navbar__main {
+  padding: rem(15) rem(20);
+  z-index: 1000;
+
+  .navbar-brand {
+    margin-right: .75rem;
+    img {
+      max-width: 280px;
+      @include media-breakpoint-down(sm) {
+        max-width: 130px;
+      }
+    }
+  }
+
+  .navbar-collapse {
+    flex-grow: inherit;
+  }
+
+  .navbar-toggler {
+    min-height: 30px;
+    border: 1px solid #fff;
+    padding: 8px 4px;
+    border-radius: 3px;
+    background-color: transparent;
+    outline: none;
+    text-align: center;
+    white-space: nowrap;
+    cursor: pointer;
+    touch-action: manipulation;
+    user-select: none;
+    .toggle-icon {
+      @extend %toggle-icon;
+      display: block;
+      position: relative;
+      &:after, &:before {
+        @extend %toggle-icon;
+        content: '';
+        position: absolute;
+        left: 0;
+      }
+      &:before {
+        top: -7px;
+      }
+      &:after {
+        bottom: -7px;
+      }
+    }
+  }
+
+  // Navbar Nav
+  .navbar-nav {
+    align-items: center;
+    .nav-item-btn {
+      padding-left: 1.5rem;
+    }
+    .nav-link {
+      @include ms-respond(font-size, 0);
+      padding-left: rem(14);
+      padding-right: rem(14);
+      cursor: pointer;
+    }
+    .nav-btn {
+      @include ms-respond(font-size, 0);
+      padding: rem(10) rem(25);
+      border-radius: rem(5);
+      font-weight: 700;
+    }
+  }
+}

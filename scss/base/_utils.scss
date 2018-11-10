@@ -1,0 +1,79 @@
+/*! _utils.scss | HTML Nunjucks Starter */
+
+/* ==========================================================================
+Utility classes
+========================================================================== */
+
+/***
+TABLE OF CONTENTS
+=============================================================================
+1. Opacity
+2. Text utils
+...Other
+=============================================================================
+***/
+
+
+// 1. Opacity (u-opacity-0, u-opacity-10, etc.)
+// --
+$i: 0;
+@while $i <= 1 {
+
+  .u-opacity-#{round($i*10)} {
+    opacity: $i !important;
+  }
+
+  $i: $i + 0.1;
+}
+
+
+
+// 2. Text utils
+// --
+
+// Text size
+.u-text-xsm {
+  @extend %text-xsm;
+}
+.u-text-sm {
+  @extend %text-sm;
+}
+.u-text-md {
+  @extend %text-md;
+}
+.u-text-lg {
+  @extend %text-lg;
+}
+.u-text-xlg {
+  @extend %text-xlg;
+}
+.u-text-xxlg {
+  @extend %text-xxlg;
+}
+
+// Font Weight
+.u-text-bold {
+  font-weight: bold;
+}
+
+
+
+// Other
+// --
+
+// Position
+.u-position-relative {
+  position: relative;
+}
+
+// Bg img
+.u-bg-img {
+  @extend %bg-img;
+  position: relative;
+}
+
+
+// Height
+.u-min-h-100vh {
+  min-height: 100vh;
+}

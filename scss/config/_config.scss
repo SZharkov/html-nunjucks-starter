@@ -1,0 +1,62 @@
+/*! _config.scss | HTML Nunjucks Starter */
+
+/* ==========================================================================
+Project Config (mostly related to bootstrap)
+========================================================================== */
+
+/***
+TABLE OF CONTENTS
+=============================================================================
+
+=============================================================================
+***/
+
+$default-transition: all .25s cubic-bezier(0.37, 0.31, 0.2, 0.85);
+
+$headings-font-weight: 600;
+$buttons-font-weight: 400;
+
+
+$spacer: 1rem !default;
+$spacers: (
+        0: 0,
+        1: ($spacer * .25),
+        2: ($spacer * .5),
+        3: $spacer,
+        4: ($spacer * 1.5),
+        5: ($spacer * 2),
+        6: ($spacer * 2.5),
+        7: ($spacer * 3),
+        8: ($spacer * 3.5),
+        9: ($spacer * 4),
+        10: ($spacer * 4.5),
+        11: ($spacer * 5),
+        12: ($spacer * 5.5),
+        13: ($spacer * 6),
+        14: ($spacer * 6.5),
+        15: ($spacer * 7),
+        16: ($spacer * 7.5),
+        17: ($spacer * 8),
+        18: ($spacer * 8.5),
+        19: ($spacer * 9),
+        20: ($spacer * 9.5),
+        21: ($spacer * 10)
+);
+
+
+$grid-breakpoints: (
+        xs: 0,
+        sm: 576px,
+        md: 768px,
+        lg: 992px,
+        xl: 1200px,
+        xxl: 1440px
+);
+
+$container-max-widths: (
+        sm: 540px,
+        md: 720px,
+        lg: 960px,
+        xl: 1180px,
+        xxl: 1400px
+);

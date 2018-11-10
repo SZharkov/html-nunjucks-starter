@@ -1,0 +1,29 @@
+{% set pageData = {
+  title: 'Home'
+} %}
+
+<!-- index.nunjucks -->
+{% extends "layout.nunjucks" %}
+
+
+
+
+{% block content %}
+
+  {% include "includes/navbar/navbar.html" %}
+
+
+  <p>Home Page Works</p>
+
+
+  {% include "includes/footer/footer.html" %}
+
+{% endblock %}
+
+
+
+{% block custom_footer_js %}
+
+  <script src="assets/js/pages/home.js"></script>
+
+{% endblock %}

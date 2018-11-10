@@ -1,0 +1,68 @@
+/*! _placeholders.scss | HTML Nunjucks Starter */
+
+/* ==========================================================================
+Scss placeholder - reusable snippets of css
+========================================================================== */
+
+/***
+TABLE OF CONTENTS
+=============================================================================
+1. Colors
+2. Text
+...Other
+=============================================================================
+***/
+
+
+
+// 1. Colors
+// --
+%color-primary {
+  color: $primary;
+}
+
+%color-white {
+  color: #fff;
+}
+
+
+// 2. Text
+// --
+%text-xsm {
+  @include ms-respond(font-size, -2, $body-modular-scale);
+}
+%text-sm {
+  @include ms-respond(font-size, -1, $body-modular-scale);
+}
+%text-md {
+  @include ms-respond(font-size, 1, $body-modular-scale);
+}
+%text-lg {
+  @include ms-respond(font-size, 2, $body-modular-scale);
+}
+%text-xlg {
+  @include ms-respond(font-size, 3, $body-modular-scale);
+}
+%text-xxlg {
+  @include ms-respond(font-size, 4, $body-modular-scale);
+}
+
+
+// Other
+// --
+
+%default-transition {
+  transition: $default-transition;
+}
+
+%bg-img {
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
+}
+
+%reset-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}

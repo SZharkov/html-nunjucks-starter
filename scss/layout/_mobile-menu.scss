@@ -1,0 +1,131 @@
+/*! _mobile-menu.scss | HTML Nunjucks Starter */
+
+/* ==========================================================================
+Mobile Menu
+========================================================================== */
+
+/***
+TABLE OF CONTENTS
+=============================================================================
+1. Mobile Menu
+=============================================================================
+***/
+
+// 1. Mobile Menu
+// --
+.mobile-menu {
+  transition: transform 0.35s ease, opacity 0.35s ease, visibility 0.35s;
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  pointer-events: none;
+  background: rgba(#1e2432, .96);
+  box-shadow: none;
+  height: 100%;
+  left: 0;
+  opacity: 0;
+  visibility: hidden;
+  overflow: hidden;
+  padding: 1em 1em;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 10002;
+
+  &.is-visible {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+  }
+
+
+  &__close {
+    transition: color 0.2s ease-in-out;
+    -webkit-tap-highlight-color: transparent;
+    border: 0;
+    cursor: pointer;
+    display: block;
+    height: 4.5em;
+    line-height: 4em;
+    overflow: hidden;
+    padding-right: 1.25em;
+    position: absolute;
+    right: 0;
+    text-align: right;
+    text-indent: 8em;
+    top: 0;
+    vertical-align: middle;
+    white-space: nowrap;
+    width: 8em;
+    &:before, &:after {
+      transition: opacity 0.2s ease-in-out;
+      background-position: center;
+      background-repeat: no-repeat;
+      content: '';
+      display: block;
+      height: 4.5em;
+      position: absolute;
+      right: 0;
+      top: -1px;
+      width: 4em;
+    }
+    &:before {
+      background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' width='20px' height='20px' viewBox='0 0 20 20' zoomAndPan='disable'%3E%3Cstyle%3Eline %7B stroke: %23ffffff%3B stroke-width: 2%3B %7D%3C/style%3E%3Cline x1='0' y1='0' x2='20' y2='20' /%3E%3Cline x1='20' y1='0' x2='0' y2='20' /%3E%3C/svg%3E");
+    }
+    &:after {
+      background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' width='20px' height='20px' viewBox='0 0 20 20' zoomAndPan='disable'%3E%3Cstyle%3Eline %7B stroke: %23FF9D00%3B stroke-width: 2%3B %7D%3C/style%3E%3Cline x1='0' y1='0' x2='20' y2='20' /%3E%3Cline x1='20' y1='0' x2='0' y2='20' /%3E%3C/svg%3E");
+      opacity: 0;
+    }
+    &:hover:after, &:active:after {
+      opacity: 1;
+    }
+  }
+
+
+  &__inner {
+    -webkit-overflow-scrolling: touch;
+    max-width: 100%;
+    width: 96%;
+    max-height: 90vh;
+    opacity: 1;
+    visibility: visible;
+    overflow: auto;
+    text-align: center;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    & > :first-child {
+      margin-top: 2em;
+    }
+    & > :last-child {
+      margin-bottom: 2em;
+    }
+    &__links {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      li {
+        &.link-btn {
+          padding-top: rem(12);
+          padding-bottom: rem(12);
+        }
+        a:not(.btn) {
+          @include ms-respond(font-size, 3, $body-modular-scale);
+          color: #f5d6d1;
+          display: inline-block;
+          font-weight: 600;
+          padding-top: rem(10);
+          padding-bottom: rem(10);
+        }
+        a.btn {
+          @include ms-respond(font-size, 3, $buttons-modular-scale);
+          padding: 10px 25px;
+        }
+        &.active {
+          & > a:not(.btn) {
+            color: $primary;
+          }
+        }
+      }
+    }
+  }
+}

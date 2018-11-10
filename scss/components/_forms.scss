@@ -1,0 +1,60 @@
+/*! _forms.scss | HTML Nunjucks Starter */
+
+/* ==========================================================================
+Forms
+========================================================================== */
+
+/***
+TABLE OF CONTENTS
+=============================================================================
+1. Opacity
+2. Text utils
+...Other
+=============================================================================
+***/
+
+
+.form-control {
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+.input-group-1 {
+  padding: 4px;
+  background-color: #fff;
+  border-radius: 4px;
+  overflow: hidden;
+  .form-control {
+    @include ms-respond(font-size, 0, $body-modular-scale);
+    border: 0;
+    height: 48px;
+    margin-right: 2px;
+    padding-left: 15px;
+    @include media-breakpoint-up(sm) {
+      @include ms-respond(font-size, 1, $body-modular-scale);
+      height: 52px;
+    }
+    @include media-breakpoint-up(lg) {
+      height: 56px;
+    }
+  }
+  .btn {
+    @extend %text-md;
+    border-radius: 4px !important;
+    padding: 0 20px;
+    height: 48px;
+    font-weight: bold;
+    @include media-breakpoint-up(sm) {
+      @include ms-respond(font-size, 2, $body-modular-scale);
+      height: 52px;
+      padding: 0 32px;
+    }
+    @include media-breakpoint-up(lg) {
+      height: 56px;
+    }
+  }
+}
+
+.form-control::placeholder {
+  color: #C5C5C5;
+}
