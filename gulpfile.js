@@ -1,16 +1,18 @@
 const gulp = require('gulp');
 const clean = require('gulp-clean');
+const uglify = require('gulp-uglify');
 const sass = require('gulp-sass');
 const sourcemaps = require('gulp-sourcemaps');
+const postcss = require('gulp-postcss');
 const autoprefixer = require('autoprefixer');
-const mq4HoverShim = require('mq4-hover-shim');
+const cssnano = require('gulp-cssnano');
 const rimraf = require('rimraf').sync;
 const browser = require('browser-sync');
 const nunjucksRender = require('gulp-nunjucks-render');
 const htmlbeautify = require('gulp-html-beautify');
 const concat = require('gulp-concat');
 const port = process.env.SERVER_PORT || 8080;
-const jsVendorsPath = 'js/vendors/';
+const jsVendorsPath = 'source/js/vendors/';
 
 // Starts a BrowerSync instance
 gulp.task('server', ['build'], function () {
@@ -19,18 +21,13 @@ gulp.task('server', ['build'], function () {
 
 // Watch files for changes
 gulp.task('watch', function () {
-  gulp.watch('scss/**/*', ['compile-scss', browser.reload]);
-  gulp.watch('js/**/*', ['copy-js', browser.reload]);
-  gulp.watch('images/**/*', ['copy-images', browser.reload]);
-  gulp.watch('html/pages/**/*', ['compile-html']);
-  gulp.watch(['html/{includes,pages}/**/*'], ['compile-html:reset', 'compile-html', browser.reload]);
+  gulp.watch('source/scss/**/*', ['compile-scss', browser.reload]);
+  gulp.watch('source/js/**/*', ['copy-js', 'compile-js', browser.reload]);
+  gulp.watch('source/images/**/*', ['copy-images', browser.reload]);
+  gulp.watch('source/fonts/**/*', ['copy-fonts', browser.reload]);
+  gulp.watch('source/html/pages/**/*', ['compile-html']);
+  gulp.watch(['source/html/{includes,pages}/**/*'], ['compile-html:reset', 'compile-html', browser.reload]);
 });
-
-// Erases the dist folder
-// gulp.task('reset', function () {
-//   rimraf('scss/*');
-//   rimraf('images/*');
-// });
 
 // Erases the dist folder
 gulp.task('clean', function () {
@@ -39,37 +36,26 @@ gulp.task('clean', function () {
 
 // Compile Theme Scss
 gulp.task('compile-scss', function () {
-  const processors = [
-    mq4HoverShim.postprocessorFor({hoverSelectorPrefix: '.is-true-hover '}),
-    autoprefixer({
-      browsers: [
-        'Chrome >= 45',
-        'Firefox ESR',
-        'Edge >= 12',
-        'Explorer >= 10',
-        'iOS >= 9',
-        'Safari >= 9',
-        'Android >= 4.4',
-        'Opera >= 30'
-      ]
-    })//,
-    //cssnano(),
+  let plugins = [
+    autoprefixer({browsers: ['last 4 versions']})
   ];
   //Watch me get Sassy
-  return gulp.src('./scss/main.scss')
+  return gulp.src('./source/scss/main.scss')
     .pipe(sourcemaps.init())
     .pipe(sass({outputStyle: 'compressed'}).on('error', sass.logError))
-    .pipe(sourcemaps.write())
-    .pipe(gulp.dest('./build/assets/css/'));
+    .pipe(postcss(plugins))
+    .pipe(cssnano())
+    .pipe(sourcemaps.write(''))
+    .pipe(gulp.dest('build/assets/css/'));
 });
 
 // Compile Html
 gulp.task('compile-html', function() {
-  return gulp.src('html/pages/**/*.+(html|nunjucks)')
+  return gulp.src('source/html/pages/**/*.+(html|nunjucks)')
     .pipe(nunjucksRender({
-      path: ['html']
+      path: ['source/html']
     }))
-    .pipe(htmlbeautify({'indentSize': 2, 'max_preserve_newlines': '2',}))
+    .pipe(htmlbeautify({indentSize: 0, maxPreserveNewlines: 2,}))
     .pipe(gulp.dest('build'))
 });
 
@@ -82,29 +68,43 @@ gulp.task('compile-js', function () {
   return gulp.src([
     // Static js assets
     jsVendorsPath + 'jquery/jquery.min.js',
+    jsVendorsPath + 'aos/aos.js',
     jsVendorsPath + 'popper/popper.min.js',
+    jsVendorsPath + 'smooth-scroll/smooth-scroll.min.js',
+    jsVendorsPath + 'tweenmax/TweenMax.min.js',
+    jsVendorsPath + 'scrollmagic/ScrollMagic.min.js',
+    jsVendorsPath + 'tweenmax/animation.gsap.min.js',
     jsVendorsPath + 'bootstrap/bootstrap.min.js',
-    jsVendorsPath + 'font-awesome/fontawesome-all.min.js',
     jsVendorsPath + 'swiper/swiper.min.js',
+    jsVendorsPath + 'font-awesome/fontawesome-all.min.js',
+    jsVendorsPath + 'parallax/parallax.min.js',
+    jsVendorsPath + 'fancybox/jquery.fancybox.min.js',
+    'source/js/main.js',
   ])
     .pipe(concat('main.js'))
+    .pipe(uglify())
     .pipe(gulp.dest('./build/assets/js/'));
 });
 
 //Copy js to production site
 gulp.task('copy-js', function () {
-  gulp.src([
-    'js/pages/**/*.js',
-  ])
+  gulp.src('source/js/pages/**/*.js')
+    .pipe(uglify())
     .pipe(gulp.dest('./build/assets/js/pages'));
+});
+
+//Copy fonts to production site
+gulp.task('copy-fonts', function () {
+  gulp.src('source/fonts/**/*')
+    .pipe(gulp.dest('./build/assets/fonts'));
 });
 
 //Copy images to production site
 gulp.task('copy-images', function () {
-  gulp.src('images/**/*')
+  gulp.src('source/images/**/*')
     .pipe(gulp.dest('./build/assets/images/'));
 });
 
 
-gulp.task('build', ['clean', 'compile-js', 'copy-js', 'compile-scss', 'compile-html', 'copy-images']);
+gulp.task('build', ['clean', 'compile-js', 'copy-js', 'compile-scss', 'compile-html', 'copy-images', 'copy-fonts']);
 gulp.task('default', ['server', 'watch']);
